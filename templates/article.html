@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="post">
+	{% autoescape off %}
+	{% load custom_filters %}
+	<h2><a href="{{ article.id }}">{{ article.title }}</a></h2>
+	<span class="author-link">&gt;by <a rel="bookmark" href="mailto:{{ article.mail }}">{{ article.author }}</a> - {{ article.time|date }} @ {{ article.time|date:"g a" }}</span>
+	<p>{{ article.content|linebreaksbr|img_tags:article }}</p>
+	{% endautoescape %}
+	<div class="kicker"></div>
+	<div id="disqus_thread" name="disqus_thread"></div>
+	<script type="text/javascript">
+		var disqus_shortname = 'dawgar';
+		(function() {
+			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+		})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+{% endblock %}

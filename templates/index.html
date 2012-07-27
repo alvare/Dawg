@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+{% block content %}
+{% load custom_filters %}
+
+{% autoescape off %}
+{% for article in article_list %}
+	<div class="post">
+		<h2><a href="{{ article.id }}">{{ article.title }}</a></h2>
+		<span class="author-link">&gt;by <a rel="bookmark" href="mailto:{{ article.mail }}">{{ article.author }}</a> - {{ article.time|date }} @ {{ article.time|date:"g a" }}</span>
+		<p>{{ article.content|linebreaksbr|truncate_magic:article.id|img_tags:article }}</p><a href="{{ article.id }}#disqus_thread" class="comment-count"></a>
+		<div class="clean"></div>
+		<div class="kicker"></div>
+	</div>
+{% endfor %}
+{% endautoescape %}
+<script type="text/javascript">
+	var disqus_shortname = 'dawgar';
+	(function () {
+		var s = document.createElement('script'); s.async = true;
+		s.type = 'text/javascript';
+		s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	}());
+</script>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>Capchion</title>
+	<meta name="description" content="The first Massively Multiplayer Online Image-Word Playing Game." />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/static/captchion.css" />
+	<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="login"><form action="captchion" method="POST">{% csrf_token %}<label for="nick">Username: </label><input type="text" name="nick" /><input type="submit" value="Ok" /></form></div>
+</body>
+</html>

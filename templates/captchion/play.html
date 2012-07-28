@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>Capchion</title>
+	<meta name="description" content="The first Massively Multiplayer Online Image-Word Playing Game." />
+	<link rel="stylesheet" type="text/css" href="/static/captchion.css" />
+	<script type="text/javascript" src="/static/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+
+<div id="main">
+	<img src="{{ MEDIA_URL }}captchion/lola.jpg" alt="caption me" width="400" /><br />
+	<form action="">
+		<label for="user_caption">Caption: </label>
+		<input id="user_caption" size="40" type="text" name="user_caption" />
+		<input type="submit" />
+	</form>
+</div>
+
+<div id="left">
+	<ul>
+		{% for a in userlist %}
+			<li>{{ a.nick }}</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<script>
+
+function refresh(){
+	$.ajax({
+			type: "POST",
+			url: "/refresh",
+			data: {"nick": "{{ user.nick }}"},
+		}).done(function(msg){
+			$('#left > ul').html(msg);
+		});
+}
+
+$('form').submit(function(){
+	$.ajax({
+		type: "POST",
+		url: "/submit",
+		data: { "user" : "{{ nick }}" , "input" : $('#user_caption').val() },
+	}).done(function(msg){
+		alert(msg);
+	});
+	return false;
+});
+
+setInterval(refresh, 10000);
+
+</script>
+
+</body>
+</html>

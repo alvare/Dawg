@@ -14,6 +14,11 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'weblog.views.index'),
-    url(r'^(\d+)$', 'weblog.views.article'),
+    (r'^$', 'weblog.views.index'),
+    (r'^(\d+)$', 'weblog.views.article'),
+
+    (r'^captchion', 'captchion.views.play'),
+    (r'^refresh', 'captchion.views.refresh'),
+    (r'^reset', 'captchion.views.reset'),
+    (r'^submit', 'captchion.views.submit'),
 )
